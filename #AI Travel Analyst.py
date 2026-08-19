@@ -194,10 +194,20 @@ def calculate_value_score(row):
         time_penalty = (row['Duration'] - row['Daily_Min_Time']) / time_diff  # Calculate the time penalty based on the daily min and max durations
     total_penalty = price_penalty + time_penalty  # Calculate the total penalty
     score = 10.0 - (total_penalty * 5.0)  # Calculate the value score
-    return score  # Return the final value score
+    return round(score, 1)  # Return the final value score
 
 
 def calculate_comfort_score(row):
     comfort_score = row['Comfort_by_class']  # Get the comfort score based on travel class
     stop_penalty = row['Total_Stops'] * 0.5  # Calculate the stop penalty based on the number of stops
-    return comfort_score - stop_penalty  # Return the final comfort score
+    return round(comfort_score - stop_penalty, 1)  # Return the final comfort score
+
+df['Value_Score'] = df.apply(calculate_value_score, axis=1)  # Apply the calculate_value_score function to each row
+df['Comfort_Score'] = df.apply(calculate_comfort_score, axis=1)
+
+print("Top 5 Value Flights:")
+best_value_flights = df.sort_values(by='Value_Score', ascending=False).head(5)  # Get the top 5 flights based on Value_Score
+print(best_value_flights[['Airline', 'Source', 'Destination', 'Price', 'Duration', 'Total_Stops', 'Travel_Class', 'Value_Score']])  # Print the relevant columns of the top 5 flights
+print("\nTop 5 Comfort Flights:")
+best_comfort_flights = df.sort_values(by='Comfort_Score', ascending=False).head(5)  # Get the top 5 flights based on Comfort_Score
+print(best_comfort_flights[['Airline', 'Source', 'Destination', 'Price', 'Duration', 'Total_Stops', 'Travel_Class', 'Comfort_Score']])  # Print the relevant columns of the top 5 flights
