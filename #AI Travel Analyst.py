@@ -170,3 +170,34 @@ def clean_airline(text):
         return None  # Return None for unexpected values
 df['Airline'] = df[col5].apply(clean_airline)  # Apply the cleaning function to the Airline column
 df = df.dropna(subset=['Airline'], inplace=True)  # Drop rows where Airline is None
+
+#Part 3: Value score and comfort score
+
+df['Daily_Min_Price'] = df.groupby(['Journey_Day'])['Price'].transform('min')  # Calculate the daily minimum price for each source-destination pair
+df['Daily_Max_Price'] = df.groupby(['Journey_Day'])['Price'].transform('max')  # Calculate the daily maximum price for each source-destination pair
+
+df['Daily_Min_Time'] = df.groupby(['Journey_Day'])['Duration'].transform('min')  # Calculate the daily minimum duration for each source-destination pair
+df['Daily_Max_Time'] = df.groupby(['Journey_Day'])['Duration'].transform('max')  # Calculate the daily maximum duration for each source-destination pair
+
+df['Comfort_by_class'] = df['Travel_Class'].map({'Economy': 1, 'Premium Economy': 2, 'Business': 3, 'First Class': 4})  # Assign comfort scores based on travel class
+
+def calculate_value_score(row):
+    price_diff = row['Daily_Max_Price'] - row['Daily_Min_Price']
+    if price_diff == 0:
+        price_penalty = 0
+    else:
+        price_penalty = (row['Price'] - row['Daily_Min_Price']) / price_diff  # Calculate the price penalty based on the daily min and max prices
+    time_diff = row['Daily_Max_Time'] - row['Daily_Min_Time']
+    if time_diff == 0:
+        time_penalty = 0
+    else:
+        time_penalty = (row['Duration'] - row['Daily_Min_Time']) / time_diff  # Calculate the time penalty based on the daily min and max durations
+    total_penalty = price_penalty + time_penalty  # Calculate the total penalty
+    score = 10.0 - (total_penalty * 5.0)  # Calculate the value score
+    return score  # Return the final value score
+
+
+def calculate_comfort_score(row):
+    comfort_score = row['Comfort_by_class']  # Get the comfort score based on travel class
+    stop_penalty = row['Total_Stops'] * 0.5  # Calculate the stop penalty based on the number of stops
+    return comfort_score - stop_penalty  # Return the final comfort score
