@@ -11,7 +11,7 @@ df.dropna(inplace=True)  # Drop rows with missing values
 
 col1 = 'Total_Price'
 col2 = 'Total_Stops'
-col3 = 'Journey_Day'
+col3 = 'Weekday'
 col4 = 'Duration'
 col5 = 'Airline'
 col6 = 'Passenger_Count'
@@ -62,7 +62,7 @@ def clean_price(text):
         return None  # Return None if conversion fails
 
 df['Total_Price'] = df[col1].apply(clean_price) # Apply the cleaning function to the Price column
-df = df.dropna(subset=['Total_Price'], inplace=True)  # Drop rows where Price is None
+df.dropna(subset=['Total_Price'], inplace=True)  # Drop rows where Price is None
 
 def clean_passenger_count(text):
     text = str(text).strip()  # Convert to string and remove whitespace
@@ -92,7 +92,7 @@ def clean_stops(text):
         return None  # Return None for unexpected values
 
 df['Total_Stops'] = df[col2].apply(clean_stops)  # Apply the cleaning function to the Total_Stops column
-df = df.dropna(subset=['Total_Stops'], inplace=True)  # Drop rows where Total_Stops is None
+df.dropna(subset=['Total_Stops'], inplace=True)  # Drop rows where Total_Stops is None
 
 def clean_duration(text):
     text = str(text).strip()  # Convert to string and remove whitespace
@@ -117,23 +117,21 @@ def clean_duration(text):
     return total_minutes if total_minutes > 0 else None  # Return None for unexpected values
 
 df['Duration'] = df[col4].apply(clean_duration)  # Apply the cleaning function to the Duration column
-df = df.dropna(subset=['Duration'], inplace=True)  # Drop rows where Duration is None
+df.dropna(subset=['Duration'], inplace=True)  # Drop rows where Duration is None
 
 
-df['Journey_Day'] = pd.to_datetime(df[col3], errors='coerce').dt.day  # Convert Journey_Day to datetime and extract the day
-df = df.dropna(subset=['Journey_Day'], inplace=True)  # Drop rows where Journey_Day is NaN
+df['Weekday'] = df[col3].str.strip()  # Convert to string, remove whitespace, and convert to lowercase
+df.dropna(subset=['Weekday'])
 
-df['Day'] = df['Journey_Day'].dt.day_name() # Extract the day from Journey_Day
+df['Day_Name'] = df['Weekday']
 
-def check_day(day):
-    if day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']:
-        return 'Weekday'
-    elif day in ['Saturday', 'Sunday']:
+def check_weekend(day):
+    if day == 'Saturday' or day == 'Sunday':
         return 'Weekend'
     else:
-        return None  # Return None for unexpected values
-df['Day_Type'] = df['Day'].apply(check_day)  # Apply the check_day function to the Day column
-
+        return 'Weekday'
+        
+df['Is_Weekend'] = df['Day_Name'].apply(check_weekend)
 def clean_travel_class(text):
     text = str(text).strip().lower()  # Convert to string, remove whitespace, and convert to lowercase
     if 'economy' in text or 'eco' in text or 'Economy' in text:
@@ -147,7 +145,7 @@ def clean_travel_class(text):
     else:
         return None  # Return None for unexpected values
 df['Travel_Class'] = df[col10].apply(clean_travel_class)  # Apply the cleaning function to the Travel_Class column
-df = df.dropna(subset=['Travel_Class'], inplace=True)  # Drop rows where Travel_Class is None
+df.dropna(subset=['Travel_Class'], inplace=True)  # Drop rows where Travel_Class is None
 
 def clean_booking_channel(text):
     text = str(text).strip().lower()  # Convert to string, remove whitespace, and convert to lowercase
@@ -160,7 +158,7 @@ def clean_booking_channel(text):
     else:
         return None  # Return None for unexpected values
 df['Booking_Channel'] = df[col9].apply(clean_booking_channel)  # Apply the cleaning function to the Booking_Channel column
-df = df.dropna(subset=['Booking_Channel'], inplace=True)  # Drop rows where Booking_Channel is None
+df.dropna(subset=['Booking_Channel'], inplace=True)  # Drop rows where Booking_Channel is None
 
 def clean_airline(text):
     text = str(text).strip()  # Convert to string and remove whitespace
@@ -169,15 +167,15 @@ def clean_airline(text):
     else:
         return None  # Return None for unexpected values
 df['Airline'] = df[col5].apply(clean_airline)  # Apply the cleaning function to the Airline column
-df = df.dropna(subset=['Airline'], inplace=True)  # Drop rows where Airline is None
+df.dropna(subset=['Airline'], inplace=True)  # Drop rows where Airline is None
 
 #3
 
-df['Daily_Min_Price'] = df.groupby(['Journey_Day'])['Price'].transform('min')  # Calculate the daily minimum price for each source-destination pair
-df['Daily_Max_Price'] = df.groupby(['Journey_Day'])['Price'].transform('max')  # Calculate the daily maximum price for each source-destination pair
+df['Daily_Min_Price'] = df.groupby(['Weekday'])['Price'].transform('min')  # Calculate the daily minimum price for each source-destination pair
+df['Daily_Max_Price'] = df.groupby(['Weekday'])['Price'].transform('max')  # Calculate the daily maximum price for each source-destination pair
 
-df['Daily_Min_Time'] = df.groupby(['Journey_Day'])['Duration'].transform('min')  # Calculate the daily minimum duration for each source-destination pair
-df['Daily_Max_Time'] = df.groupby(['Journey_Day'])['Duration'].transform('max')  # Calculate the daily maximum duration for each source-destination pair
+df['Daily_Min_Time'] = df.groupby(['Weekday'])['Duration'].transform('min')  # Calculate the daily minimum duration for each source-destination pair
+df['Daily_Max_Time'] = df.groupby(['Weekday'])['Duration'].transform('max')  # Calculate the daily maximum duration for each source-destination pair
 
 df['Comfort_by_class'] = df['Travel_Class'].map({'Economy': 1, 'Premium Economy': 2, 'Business': 3, 'First Class': 4})  # Assign comfort scores based on travel class
 
