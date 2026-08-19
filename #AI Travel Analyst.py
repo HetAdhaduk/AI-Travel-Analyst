@@ -162,3 +162,11 @@ def clean_booking_channel(text):
 df['Booking_Channel'] = df[col9].apply(clean_booking_channel)  # Apply the cleaning function to the Booking_Channel column
 df = df.dropna(subset=['Booking_Channel'], inplace=True)  # Drop rows where Booking_Channel is None
 
+def clean_airline(text):
+    text = str(text).strip()  # Convert to string and remove whitespace
+    if text:
+        return text  # Return the airline name if it's not empty
+    else:
+        return None  # Return None for unexpected values
+df['Airline'] = df[col5].apply(clean_airline)  # Apply the cleaning function to the Airline column
+df = df.dropna(subset=['Airline'], inplace=True)  # Drop rows where Airline is None
