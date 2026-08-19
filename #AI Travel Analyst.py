@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-#Part 1 loading the data
+#1
 print("Data loading")
 df = pd.read_csv('flight_pricing_dataset.csv')
 df.columns = df.columns.str.strip()  # Remove any leading/trailing whitespace from column names
@@ -46,7 +46,7 @@ for col in df.columns:   #to go through all the names in a columns
 print('Data loaded')
 
 
-#Part 2: Data cleaning
+#2
 
 #Cleaning Price
 def clean_price(text):
@@ -171,7 +171,7 @@ def clean_airline(text):
 df['Airline'] = df[col5].apply(clean_airline)  # Apply the cleaning function to the Airline column
 df = df.dropna(subset=['Airline'], inplace=True)  # Drop rows where Airline is None
 
-#Part 3: Value score and comfort score
+#3
 
 df['Daily_Min_Price'] = df.groupby(['Journey_Day'])['Price'].transform('min')  # Calculate the daily minimum price for each source-destination pair
 df['Daily_Max_Price'] = df.groupby(['Journey_Day'])['Price'].transform('max')  # Calculate the daily maximum price for each source-destination pair
