@@ -25,6 +25,8 @@
 | Daily\_Min\_Time/ Daily\_Max\_Time | Integer | The shortest and longest flight durations recorded for that day of the week. |
 | Value\_Score | Float | A 0-10 score evaluating cost-effectiveness and time-efficiency |
 | Comfort\_Score | Float | A 0-10 score evaluating travel class, penalizing layovers and high prices. |
+
+
 **______________________________________________________________________________________________________________________________**
 **______________________________________________________________________________________________________________________________**
 
