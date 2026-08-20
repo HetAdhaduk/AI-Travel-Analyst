@@ -43,8 +43,8 @@ While the example dataset used to generate output is
 
 **Methodology**
 
-1. **Dynamic Data Scanning:**Scans column headers and assigns them to internal variables based on keyword matching   
-2. **Data Cleaning:**Cleans, categorizes and standardizes data into specific classes  
+1. **Dynamic Data Scanning:** Scans column headers and assigns them to internal variables based on keyword matching   
+2. **Data Cleaning:** Cleans, categorizes and standardizes data into specific classes  
 3. **Custom Scoring Algorithms:**  
 * **Value Score**: Penalizes flights that are significantly more expensive or longer than the daily minimums for that route.  
 * **Comfort Score**: Rewards premium cabin classes while penalizing for layovers and unusually high prices.  
@@ -108,3 +108,7 @@ Insights and Recommendations:
 7 Statistical plots:  
 <img width="2558" height="1524" alt="image" src="https://github.com/user-attachments/assets/36a227b7-891f-4786-86a3-330b149ac42a" />
   
+**\______________________________________________________________________________________________________________________________**
+
+**Demo Video**
+https://drive.google.com/file/d/19HFycBlsWXQNzpVPjeCDS-B0QPy11HLF/view?usp=drivesdk
