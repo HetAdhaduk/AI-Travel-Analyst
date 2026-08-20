@@ -1,12 +1,15 @@
 **Technical Documentation: AI Travel Agent**
-
+**______________________________________________________________________________________________________________________________**
+**______________________________________________________________________________________________________________________________**
 1. **System Architecture:**  
    The script operates in a linear algorithm:  
 * **Dynamic scanning:** Reads the CSV and uses string-matching search to identify columns regardless of exact naming conventions.  
 * **Data Cleaning:** Normalizes and standardizes strings, handles missing data, and converts pricing/time into manageable formats.  
 * **Feature Making:** Calculates per-passenger pricing and derives daily minimums/maximums for relative comparisons.  
 * **Scoring System:** Applies specific functions to assign flights a 1-10 score for Value and Comfort.  
-* **Visualization Generation:** Compiles processed data into panel Matplotlib/Seaborn dashboard.  
+* **Visualization Generation:** Compiles processed data into panel Matplotlib/Seaborn dashboard.
+**______________________________________________________________________________________________________________________________**
+**______________________________________________________________________________________________________________________________**
 2. **Data Dictionary (Engineered Features):**  
    While the script ingests standard flight data, these features create several new columns during executions.  
    Here are the key engineered features:  
@@ -20,7 +23,8 @@
 | Daily\_Min\_Time/ Daily\_Max\_Time | Integer | The shortest and longest flight durations recorded for that day of the week. |
 | Value\_Score | Float | A 0-10 score evaluating cost-effectiveness and time-efficiency |
 | Comfort\_Score | Float | A 0-10 score evaluating travel class, penalizing layovers and high prices. |
-
+**______________________________________________________________________________________________________________________________**
+**______________________________________________________________________________________________________________________________**
 3. **Function definition and methods**  
    **Cleaning functions**  
    These functions handle raw inputs from the dataset and standardize them.  
@@ -43,7 +47,7 @@
 * *clean\_travel\_class(text),clean\_season(text),clean\_booking\_channel(text)*
 
   **Purpose:** function that transforms raw data into clean, uniform categories.
-
+**______________________________________________________________________________________________________________________________**
 
   **Scoring Algorithms**
 
@@ -60,7 +64,7 @@
   **Purpose:** calculates a flights “Comfort” level based on cabin class and layovers.
 
   **Logic:** assigns a base score based on the cabin class (Economy=2, First Class=10). Deducts 0.5 points for every layover. Applies a slight penalty for high pricing to balance the score.
-
+**______________________________________________________________________________________________________________________________** **______________________________________________________________________________________________________________________________**
 4. **Environment & Execution Notes**  
 * **Missing Data Handling:** The script uses *df.dropna()* after applying cleaning functions. If a row contains malformed or empty data, the entire row is dropped to preserve the integrity of the analysis.
 
