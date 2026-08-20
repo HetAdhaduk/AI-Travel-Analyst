@@ -259,11 +259,11 @@ sns.boxplot(x='Day_Name', y='Price', hue='Day_Name', data=df, order=days, palett
 plt.title('Price Distribution by Day')  # Set the title of the plot
 
 plt.subplot(4, 2, 3)
-sns.barplot(x='Value_Score', y='Airline', data=airline_avg_scores1, palette="Set2")  # Create a bar plot for average Value_Score by Airline
+sns.barplot(x='Value_Score', y='Airline', data=airline_avg_scores1, hue='Airline', palette="Set2")  # Create a bar plot for average Value_Score by Airline
 plt.title('Average Value Score by Airline')  # Set the title of the plot
 
 plt.subplot(4, 2, 4)
-sns.barplot(x='Comfort_Score', y='Airline', data=airline_avg_scores2, palette="Set2")  # Create a bar plot for average Comfort_Score by Airline
+sns.barplot(x='Comfort_Score', y='Airline', data=airline_avg_scores2, hue='Airline', palette="Set2")  # Create a bar plot for average Comfort_Score by Airline
 plt.title('Average Comfort Score by Airline')  # Set the title of the plot
 
 plt.subplot(4, 2, 5)
