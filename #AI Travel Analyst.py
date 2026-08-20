@@ -248,19 +248,19 @@ print(best_comfort_flights[[col5, 'Source', 'Destination', 'Price', 'Duration', 
 #4
 print("Factors Affecting Flight Prices:")
 avg_class=df.groupby('Travel_Class')['Price'].mean().reset_index().sort_values(by='Price', ascending=False)  # Calculate the average price for each travel class
-print("\n1 Average Price by Travel Class:")
+print("\nAverage Price by Travel Class:")
 print(avg_class.round(2))  # Print the average price by travel class
 
 avg_stops=df.groupby('Total_Stops')['Price'].mean().reset_index().sort_values(by='Price', ascending=False)  # Calculate the average price for each number of stops
-print("\n2 Average Price by Total Stops:")
+print("\nAverage Price by Total Stops:")
 print(avg_stops.round(2))  # Print the average price by total stops
 
 avg_season=df.groupby('Season')['Price'].mean().reset_index().sort_values(by='Price', ascending=False)  # Calculate the average price for each season
-print("\n3 Average Price by Season:")
+print("\nAverage Price by Season:")
 print(avg_season.round(2))  # Print the average price by season
 
 avg_day=df.groupby('Day_Name')['Price'].mean().reset_index().sort_values(by='Price', ascending=False)  # Calculate the average price for each day of the week
-print("\n4 Average Price by Day of the Week:")
+print("\nAverage Price by Day of the Week:")
 print(avg_day.round(2))  # Print the average price by day of the week
 
 print("\nInsights And Recommendations:")
