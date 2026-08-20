@@ -246,6 +246,45 @@ best_comfort_flights = df.sort_values(by='Comfort_Score', ascending=False).head(
 print(best_comfort_flights[[col5, 'Source', 'Destination', 'Price', 'Duration', 'Total_Stops', 'Travel_Class', 'Comfort_Score']])  # Print the relevant columns of the top 5 flights
 
 #4
+print("Factors Affecting Flight Prices:")
+avg_class=df.groupby('Travel_Class')['Price'].mean().reset_index().sort_values(by='Price', ascending=False)  # Calculate the average price for each travel class
+print("\n1 Average Price by Travel Class:")
+print(avg_class.round(2))  # Print the average price by travel class
+
+avg_stops=df.groupby('Total_Stops')['Price'].mean().reset_index().sort_values(by='Price', ascending=False)  # Calculate the average price for each number of stops
+print("\n2 Average Price by Total Stops:")
+print(avg_stops.round(2))  # Print the average price by total stops
+
+avg_season=df.groupby('Season')['Price'].mean().reset_index().sort_values(by='Price', ascending=False)  # Calculate the average price for each season
+print("\n3 Average Price by Season:")
+print(avg_season.round(2))  # Print the average price by season
+
+avg_day=df.groupby('Day_Name')['Price'].mean().reset_index().sort_values(by='Price', ascending=False)  # Calculate the average price for each day of the week
+print("\n4 Average Price by Day of the Week:")
+print(avg_day.round(2))  # Print the average price by day of the week
+
+print("\nInsights And Recommendations:")
+cheap_season = avg_season.index[0]
+expensive_season = avg_season.index[-1]
+
+cheap_day = avg_day.index[0]
+expensive_day = avg_day.index[-1]
+
+print("\n Insights:")
+print("Travel Class is the biggest factor affecting flight price where Economy is the best option")
+print(cheap_season ,"The cheapest season")
+print(expensive_season ,"The most expensive season")
+print(cheap_day ,"The cheapest day of the week")
+print(expensive_day ,"The most expensive day of the week")
+
+print("\n Recommendations:")
+print("1. Book flights during", cheap_season ," to save money.")
+print("2. Try to schedule flights on", cheap_day ,"for lower cost.")
+print("3. Choose Economy class for the best value.")
+print("4. Consider airlines with higher average Value_Score and Comfort_Score for a better travel experience.")
+
+
+#5
 sns.set_theme(style="whitegrid")
 plt.figure(figsize=(20, 22))
 
