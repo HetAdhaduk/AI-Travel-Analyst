@@ -1,12 +1,11 @@
-**AI-Travel-Analyst**  
-**\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_**
-
+**AI-Travel-Analyst** 
+**______________________________________________________________________________________________________________________________**
 The **AI Travel Analyst** is a tool made with Python. It helps people who travel find the flights. The tool looks at flight data that is not organized. It makes the data clean. It also creates things to help decide. It adds scores for each flight. These scores are for **Value** and **Comfort**. The tool gives advice that people can use. It also makes a dashboard with pictures. This dashboard helps people see how prices change with the seasons, days of the week and airlines.   
-**\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_**
+**______________________________________________________________________________________________________________________________**
 
 **Problem Statement**  
 Travelers often struggle finding the right mix between price, how long the flight takes and how comfortable it is. Flight search engines show a lot of information that can be hard to understand. The prices are different, there are stops and the classes of seats are not always clear. The purpose of this project is to get useful information, from messy flight data and rate the flights in a fair way. This helps people see if a flight is really a deal or if it's a comfortable choice.   
-**\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_**
+**______________________________________________________________________________________________________________________________**
 
 
 **Installation Instructions**
@@ -34,13 +33,13 @@ Travelers often struggle finding the right mix between price, how long the fligh
 4. Run the script:  
    Python \#Ai Travel [Analyst.py](http://Analyst.py)
 
-**\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_**
+**______________________________________________________________________________________________________________________________**
 
 **Dataset Used**  
 The script expects a CSV file named flight\_pricing\_dataset.csv.  
 While the example dataset used to generate output is  
 [https://drive.google.com/file/d/1a2bCY33C7cHpVCTVz\_\_5fVobesfFTBKd/view?usp=drivesdk](https://drive.google.com/file/d/1a2bCY33C7cHpVCTVz__5fVobesfFTBKd/view?usp=drivesdk)  
-**\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_**
+**______________________________________________________________________________________________________________________________**
 
 **Methodology**
 
@@ -51,7 +50,7 @@ While the example dataset used to generate output is
 * **Comfort Score**: Rewards premium cabin classes while penalizing for layovers and unusually high prices.  
 4. **Visualization:** Utilizes Matplotlib and Seaborn to generate a 7-panel statistical dashboard.
 
-**\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_**
+**______________________________________________________________________________________________________________________________**
 
 **Technologies Used**
 
@@ -59,7 +58,7 @@ While the example dataset used to generate output is
 * **Pandas**: For data manipulation, cleaning, and feature engineering.  
 * **Matplotlib & Seaborn**: For generating statistical data visualizations.
 
-**\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_**
+**______________________________________________________________________________________________________________________________**
 
 **Results**  
 Upon execution, the scripts outputs directly to the terminal:
@@ -70,7 +69,7 @@ Upon execution, the scripts outputs directly to the terminal:
 * **Automated Insights & Recommendations:** Text-based tips highlighting the cheapest days to fly, the most expensive seasons, and airline recommendations.
 
 Additionally, it generates a full-screen GUI window containing 7 distinct charts  
-**\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_**
+**______________________________________________________________________________________________________________________________**
 
 
 **Challenges Faced**
@@ -79,7 +78,7 @@ Additionally, it generates a full-screen GUI window containing 7 distinct charts
 * **Currency and Data Types:** Cleaning numeric data that included commas and multiple types of currency symbols (₹, Rs) so it could be processed as floats.  
 * **Relative Scoring:** Formulating a mathematical score for "Value" required grouping by day and calculating relative penalties (comparing a flight's price/time against the daily minimums and maximums) to ensure the scores were fair across different routes.
 
-**\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_**
+**______________________________________________________________________________________________________________________________**
 
 **Future Improvements**
 
@@ -87,7 +86,7 @@ Additionally, it generates a full-screen GUI window containing 7 distinct charts
 * **Machine Learning:** Implement a regression model (e.g., Random Forest )to predict future flight prices based on historical trends.  
 * **Interactive Dashboard:** Migrate the Matplotlib visualizations to an interactive web app, allowing users to filter by their specific source and destination dynamically.
 
-**\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_**
+**\______________________________________________________________________________________________________________________________**
 
 **Output Screenshots**  
 Top 5 value flights:  
