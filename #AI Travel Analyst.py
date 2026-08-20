@@ -19,6 +19,7 @@ col7 = 'Source'
 col8 = 'Destination'
 col9 = 'Booking_Channel'
 col10 = 'Travel_Class'
+col11 = 'Season'
 
 for col in df.columns:   #to go through all the names in a columns
     col_lower = col.lower()  # Convert column name to lowercase
@@ -42,7 +43,8 @@ for col in df.columns:   #to go through all the names in a columns
         col9 = col
     if 'travel class' in col_lower or 'cabin' in col_lower:
         col10 = col
-
+    if 'season' in col_lower:
+        col11 = col
 print('Data loaded')
 
 
@@ -74,7 +76,24 @@ def clean_passenger_count(text):
 df['Passenger_Count'] = df[col6].apply(clean_passenger_count)  # Apply the cleaning function to the Passenger_Count column
 df.fillna({'Passenger_Count': 1}, inplace=True)  # Fill NaN values in Passenger_Count with 1
 df['Price']= df['Total_Price'] / df['Passenger_Count']  # Calculate price per passenger
+df['Price'] = df['Price'].round(2)  # Round the price to 2 decimal places
 
+def clean_season(text):
+    text = str(text).strip().lower()  # Convert to string, remove whitespace, and convert to lowercase
+    if 'summer' in text:
+        return 'Summer'
+    elif 'winter' in text:
+        return 'Winter'
+    elif 'spring' in text:
+        return 'Spring'
+    elif 'autumn' in text:
+        return 'Autumn'
+    elif 'monsoon' in text:
+        return 'Monsoon'
+    else:
+        return None  # Return None for unexpected values
+df['Season'] = df[col11].apply(clean_season)  # Apply the cleaning function to the Season column
+df.dropna(subset=['Season'], inplace=True)  # Drop rows where Season is None
 
 def clean_stops(text):
     text = str(text).strip()  # Convert to string and remove whitespace
@@ -93,6 +112,15 @@ def clean_stops(text):
 
 df['Total_Stops'] = df[col2].apply(clean_stops)  # Apply the cleaning function to the Total_Stops column
 df.dropna(subset=['Total_Stops'], inplace=True)  # Drop rows where Total_Stops is None
+
+def clean_airline(text):
+    text = str(text).strip().lower()  # Convert to string and remove whitespace
+    if text:
+        return text  # Return the airline name if it's not empty
+    else:
+        return None  # Return None for unexpected values
+df['Airline'] = df[col5].apply(clean_airline)  # Apply the cleaning function to the Airline column
+df.dropna(subset=['Airline'], inplace=True)  # Drop rows where Airline is None
 
 def clean_duration(text):
     text = str(text).strip()  # Convert to string and remove whitespace
@@ -117,11 +145,12 @@ def clean_duration(text):
     return total_minutes if total_minutes > 0 else None  # Return None for unexpected values
 
 df['Duration'] = df[col4].apply(clean_duration)  # Apply the cleaning function to the Duration column
+df['Duration'] = df['Duration'].round(2)  # Round the Duration to 2 decimal places
 df.dropna(subset=['Duration'], inplace=True)  # Drop rows where Duration is None
 
 
 df['Weekday'] = df[col3].str.strip()  # Convert to string, remove whitespace, and convert to lowercase
-df.dropna(subset=['Weekday'])
+df.dropna(subset=['Weekday'], inplace=True)  # Drop rows where Weekday is None
 
 df['Day_Name'] = df['Weekday']
 
@@ -177,7 +206,7 @@ df['Daily_Max_Price'] = df.groupby(['Weekday'])['Price'].transform('max')  # Cal
 df['Daily_Min_Time'] = df.groupby(['Weekday'])['Duration'].transform('min')  # Calculate the daily minimum duration for each source-destination pair
 df['Daily_Max_Time'] = df.groupby(['Weekday'])['Duration'].transform('max')  # Calculate the daily maximum duration for each source-destination pair
 
-df['Comfort_by_class'] = df['Travel_Class'].map({'Economy': 1, 'Premium Economy': 2, 'Business': 3, 'First Class': 4})  # Assign comfort scores based on travel class
+df['Comfort_by_class'] = df['Travel_Class'].map({'Economy': 2, 'Premium Economy': 6, 'Business': 8, 'First Class': 10})  # Assign comfort scores based on travel class
 
 def calculate_value_score(row):
     price_diff = row['Daily_Max_Price'] - row['Daily_Min_Price']
@@ -198,14 +227,65 @@ def calculate_value_score(row):
 def calculate_comfort_score(row):
     comfort_score = row['Comfort_by_class']  # Get the comfort score based on travel class
     stop_penalty = row['Total_Stops'] * 0.5  # Calculate the stop penalty based on the number of stops
-    return round(comfort_score - stop_penalty, 1)  # Return the final comfort score
+    price_penalty = (row['Price'] - row['Daily_Min_Price']) / (row['Daily_Max_Price'] - row['Daily_Min_Price']) * 2.0 if row['Daily_Max_Price'] != row['Daily_Min_Price'] else 0  # Calculate the price penalty based on the daily min and max prices
+    return round(comfort_score - stop_penalty - price_penalty, 1)  # Return the final comfort score
 
 df['Value_Score'] = df.apply(calculate_value_score, axis=1)  # Apply the calculate_value_score function to each row
 df['Comfort_Score'] = df.apply(calculate_comfort_score, axis=1)
 
+airline_avg_scores1 = df.groupby('Airline')[['Value_Score']].mean().reset_index()  # Calculate the average Value_Score and Comfort_Score for each airline
+airline_avg_scores1['Value_Score'] = airline_avg_scores1['Value_Score'].round(2)  # Round the Value_Score to 2 decimal places
+airline_avg_scores2 = df.groupby('Airline')[['Comfort_Score']].mean().reset_index()  # Calculate the average Comfort_Score for each airline
+airline_avg_scores2['Comfort_Score'] = airline_avg_scores2['Comfort_Score'].round(2)  # Round the Comfort_Score to 2 decimal places
+
 print("Top 5 Value Flights:")
 best_value_flights = df.sort_values(by='Value_Score', ascending=False).head(5)  # Get the top 5 flights based on Value_Score
-print(best_value_flights[['Airline', 'Source', 'Destination', 'Price', 'Duration', 'Total_Stops', 'Travel_Class', 'Value_Score']])  # Print the relevant columns of the top 5 flights
+print(best_value_flights[[col5, 'Source', 'Destination', 'Price', 'Duration', 'Total_Stops', 'Travel_Class', 'Value_Score']])  # Print the relevant columns of the top 5 flights
 print("\nTop 5 Comfort Flights:")
 best_comfort_flights = df.sort_values(by='Comfort_Score', ascending=False).head(5)  # Get the top 5 flights based on Comfort_Score
-print(best_comfort_flights[['Airline', 'Source', 'Destination', 'Price', 'Duration', 'Total_Stops', 'Travel_Class', 'Comfort_Score']])  # Print the relevant columns of the top 5 flights
+print(best_comfort_flights[[col5, 'Source', 'Destination', 'Price', 'Duration', 'Total_Stops', 'Travel_Class', 'Comfort_Score']])  # Print the relevant columns of the top 5 flights
+
+#4
+sns.set_theme(style="whitegrid")
+plt.figure(figsize=(20, 22))
+
+plt.subplot(4, 2, 1)
+sns.histplot(df['Season'], bins=20, color='lightblue')  # Create a histogram for Season
+plt.title('Seasonal Distribution of Flights')  # Set the title of the plot
+    
+plt.subplot(4, 2, 2)
+days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+sns.boxplot(x='Day_Name', y='Price', hue='Day_Name', data=df, order=days, palette="Set2", legend=False, showfliers=False)  # Create a boxplot for Price by Day_Name
+plt.title('Price Distribution by Day')  # Set the title of the plot
+
+plt.subplot(4, 2, 3)
+sns.barplot(x='Value_Score', y='Airline', data=airline_avg_scores1, palette="Set2")  # Create a bar plot for average Value_Score by Airline
+plt.title('Average Value Score by Airline')  # Set the title of the plot
+
+plt.subplot(4, 2, 4)
+sns.barplot(x='Comfort_Score', y='Airline', data=airline_avg_scores2, palette="Set2")  # Create a bar plot for average Comfort_Score by Airline
+plt.title('Average Comfort Score by Airline')  # Set the title of the plot
+
+plt.subplot(4, 2, 5)
+sns.histplot(df['Booking_Channel'], bins=20, color='lightgreen')  # Create a histogram for Booking_Channel
+plt.title('Preferred Booking Channel')  # Set the title of the plot
+
+plt.subplot(4, 2, 6)
+sns.histplot(df['Travel_Class'], bins=20, color='lightcoral')  # Create a histogram for Travel_Class
+plt.title('Preferred Travel Class')  # Set the title of the plot
+
+plt.subplot(4, 2, 7)
+sns.boxplot(x='Total_Stops', y='Price', hue='Total_Stops', data=df, palette="Set2", legend=False, showfliers=False)  # Create a boxplot for Price by Total_Stops
+plt.title('Price Distribution by Total Stops')  # Set the title of the plot 
+
+plt.subplots_adjust(
+    left=0.159, 
+    bottom=0.05, 
+    right=0.933, 
+    top=0.938, 
+    wspace=0.289, 
+    hspace=0.43
+)
+plt.show()  # Display all the plots
+
+
