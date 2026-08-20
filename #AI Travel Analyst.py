@@ -264,18 +264,20 @@ print("\nAverage Price by Day of the Week:")
 print(avg_day.round(2))  # Print the average price by day of the week
 
 print("\nInsights And Recommendations:")
-cheap_season = avg_season.index[0]
-expensive_season = avg_season.index[-1]
+season_list = list(avg_season['Season'])  # Get the list of seasons sorted by average price
+day_list = list(avg_day['Day_Name'])  # Get the list of days sorted by average price
+cheap_season = season_list[-1]
+expensive_season = season_list[0]
 
-cheap_day = avg_day.index[0]
-expensive_day = avg_day.index[-1]
+cheap_day = day_list[-1]
+expensive_day = day_list[0]
 
 print("\n Insights:")
 print("Travel Class is the biggest factor affecting flight price where Economy is the best option")
-print(cheap_season ,"The cheapest season")
-print(expensive_season ,"The most expensive season")
-print(cheap_day ,"The cheapest day of the week")
-print(expensive_day ,"The most expensive day of the week")
+print(cheap_season ,"Is the cheapest season")
+print(expensive_season ,"Is the most expensive season")
+print(cheap_day ,"Is the cheapest day of the week")
+print(expensive_day ,"Is the most expensive day of the week")
 
 print("\n Recommendations:")
 print("1. Book flights during", cheap_season ," to save money.")
