@@ -91,29 +91,21 @@ Additionally, it generates a full-screen GUI window containing 7 distinct charts
 
 **Output Screenshots**  
 Top 5 value flights:  
-![][image1]
+<img width="1126" height="204" alt="image" src="https://github.com/user-attachments/assets/66c34619-7adb-41e0-9f77-335f3b596ef6" />
+
 
 Top 5 comfort flights:  
-![][image2]
+<img width="1234" height="184" alt="image" src="https://github.com/user-attachments/assets/6b3b86d3-2066-4d35-b011-4e99c3a5b5a8" />
+
 
 Factor Affecting Flight Prices:  
-![][image3]
+<img width="1230" height="786" alt="image" src="https://github.com/user-attachments/assets/8d4b58f8-4620-47cf-817d-c727e14b65e7" />
+
 
 Insights and Recommendations:  
-![][image4]
+<img width="1212" height="416" alt="image" src="https://github.com/user-attachments/assets/7dceb652-e456-4744-abc9-047a2629a33b" />
+
 
 7 Statistical plots:  
-![][image5]  
-
-
-[image1]: <img width="1126" height="204" alt="image" src="https://github.com/user-attachments/assets/6dbf4045-486c-4729-93cd-c01ddc73e921" />
-
-
-[image2]: <img width="1234" height="184" alt="image" src="https://github.com/user-attachments/assets/70e4b06f-6991-44d8-8a2e-b0731ccb616e" />
-
-[image3]: <img width="1230" height="786" alt="image" src="https://github.com/user-attachments/assets/0c28fc5f-01e3-4ef2-b6ef-86ef1cddcb6d" />
-
-[image4]: <img width="1212" height="416" alt="image" src="https://github.com/user-attachments/assets/60bd23cd-9cc5-4029-9acc-ec87279bbb04" />
-
-
-[image5]: <img width="2558" height="1524" alt="image" src="https://github.com/user-attachments/assets/b783dacd-db16-414a-82b5-6109ef506e4e" />
+<img width="2558" height="1524" alt="image" src="https://github.com/user-attachments/assets/36a227b7-891f-4786-86a3-330b149ac42a" />
+  
